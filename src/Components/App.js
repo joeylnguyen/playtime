@@ -34,7 +34,7 @@ const App = () => {
   return (
     <div>
       {signedIn
-      ? <div>Hi {userData.display_name}</div>
+      ? <BuilderPage userData={userData}/>
       : <Wrapper>
         <div>
           <span>PlayTime</span>
