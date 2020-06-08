@@ -10,15 +10,23 @@ const BuilderPage = ( { userData, accessToken } ) => {
     setPlaylistName(event.target.value);
   };
 
+  const addTracksToPlaylist = () => {
+
+  };
+
   const handleCreatePlaylist = () => {
     axios({
-      method: 'get',
+      method: 'post',
       url: `https://api.spotify.com/v1/users/${userData.id}/playlists`,
       data: {
         name: playlistName,
         description: 'Created with the PlayTime App!'
       }
-    });
+    })
+      .then((result) => {
+        addTracksToPlaylist();
+      })
+      .catch((error) => console.log(error));
   }
 
   useEffect(() => {
