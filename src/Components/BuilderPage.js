@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const BuilderPage = ( { userData, accessToken } ) => {
-  const [tracks, setTracks] = useState([])
-  const [playlistName, setPlaylistName] = useState('')
+  const [tracks, setTracks] = useState([]);
+  const [playlistName, setPlaylistName] = useState('');
 
   const handleChange = (event) => {
     console.log(event.target.value);
-    setPlaylistName(event.target.value)
+    setPlaylistName(event.target.value);
   };
 
   const handleCreatePlaylist = () => {
@@ -18,7 +18,7 @@ const BuilderPage = ( { userData, accessToken } ) => {
         name: playlistName,
         description: 'Created with the PlayTime App!'
       }
-    })
+    });
   }
 
   useEffect(() => {
@@ -28,7 +28,11 @@ const BuilderPage = ( { userData, accessToken } ) => {
         url: `https://api.spotify.com/v1/recommendations?seed_artists=${artistIds}&limit=100`,
         headers: {'Authorization': 'Bearer ' + accessToken},
       })
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        const tracksArray = result.data.tracks.map((track) => track.uri);
+        setTracks(tracksArray);
+      })
       .catch((error) => console.log(error));
     }
 
@@ -44,7 +48,7 @@ const BuilderPage = ( { userData, accessToken } ) => {
           getTracks(artistIdString)
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error));
 
   }, [accessToken]);
 
