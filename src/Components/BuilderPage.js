@@ -6,25 +6,35 @@ const BuilderPage = ( { userData, accessToken } ) => {
   const [playlistName, setPlaylistName] = useState('');
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     setPlaylistName(event.target.value);
   };
 
-  const addTracksToPlaylist = () => {
-
+  const addTracksToPlaylist = (playlistId) => {
+    axios({
+      method: 'post',
+      url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      headers: {'Authorization': 'Bearer ' + accessToken},
+      data: {'uris': tracks}
+    })
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error));
   };
 
-  const handleCreatePlaylist = () => {
+  const handleCreatePlaylist = (event) => {
+    event.preventDefault();
+
     axios({
       method: 'post',
       url: `https://api.spotify.com/v1/users/${userData.id}/playlists`,
+      headers: {'Authorization': 'Bearer ' + accessToken},
       data: {
         name: playlistName,
         description: 'Created with the PlayTime App!'
       }
     })
       .then((result) => {
-        addTracksToPlaylist();
+        addTracksToPlaylist(result.data.id);
+        setPlaylistName('');
       })
       .catch((error) => console.log(error));
   }
