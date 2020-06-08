@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 
 function App() {
   return (
     <div className="App">
-      Hello
+      <button onClick={() => window.location = 'http://localhost:8888/login'}>
+        Sign into Spotify
+      </button>
     </div>
   );
 }
