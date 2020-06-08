@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const BuilderPage = ( { userData, accessToken } ) => {
-  const [tracks, setTracks] = useState()
+  const [tracks, setTracks] = useState([])
+  const [playlistName, setPlaylistName] = useState('')
 
-  const handleCreatePlaylist = (playlistName) => {
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setPlaylistName(event.target.value)
+  };
+
+  const handleCreatePlaylist = () => {
     axios({
       method: 'get',
       url: `https://api.spotify.com/v1/users/${userData.id}/playlists`,
@@ -45,6 +51,13 @@ const BuilderPage = ( { userData, accessToken } ) => {
   return (
     <div>
       <div>Hi {userData.display_name}</div>
+      <form onSubmit={handleCreatePlaylist}>
+        <label>
+          Playlist Name:
+          <input type="text" name="playlistName" value={playlistName} onChange={handleChange}/>
+        </label>
+        <input type ="submit" value="Create Playlist!" />
+      </form>
     </div>
 
   )
