@@ -8,10 +8,16 @@ import '../App.css';
 const App = () => {
   const [userData, setUserData] = useState({});
   const [signedIn, setSignedIn] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
+
+  const handleSignIn = () => {
+    window.location = 'http://localhost:8888/login';
+  }
 
   useEffect(() => {
     const parsed = querystring.parse(window.location.search);
-    const accessToken = parsed['?access_token'];
+    setAccessToken(parsed['?access_token']);
+
     if (accessToken) {
       axios({
         method: 'get',
@@ -19,22 +25,17 @@ const App = () => {
         headers: {'Authorization': 'Bearer ' + accessToken},
       })
         .then((result) => {
-          console.log(result)
           setUserData(result.data);
           setSignedIn(true);
         })
         .catch((error) => console.log(error));
     }
-  }, []);
-
-  const handleSignIn = () => {
-    window.location = 'http://localhost:8888/login';
-  }
+  }, [accessToken]);
 
   return (
     <div>
       {signedIn
-      ? <BuilderPage userData={userData}/>
+      ? <BuilderPage userData={userData} accessToken={accessToken}/>
       : <Wrapper>
         <div>
           <span>PlayTime</span>
