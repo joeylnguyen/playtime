@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import Timer from './Timer';
-import Confirmation from './Confirmation';
-
+import Confirmation, { Button } from './Confirmation';
 
 const BuilderPage = ( { userData, accessToken } ) => {
   const [tracks, setTracks] = useState([]);
@@ -121,11 +121,12 @@ const BuilderPage = ( { userData, accessToken } ) => {
       <div>Hi {userData.display_name}</div>
       <Timer hours={hours} minutes={minutes} handleChange={handleChange} />
       <form onSubmit={handleCreatePlaylist}>
-        <label>
-          Playlist Name:
-          <input type="text" id="playlistName" value={playlistName} onChange={handleChange} />
-        </label>
-        <input type ="submit" value="Create Playlist!" />
+        <Label>
+          <NameInput type="text" id="playlistName" placeholder="Name your playlist" value={playlistName} onChange={handleChange} />
+        </Label>
+        <SubmitButtonWrapper>
+          <SubmitButton type ="submit" value="Create Playlist" />
+        </SubmitButtonWrapper>
       </form>
       {showModal ? <Confirmation playlistData={playlistData} accessToken={accessToken} setShowModal={setShowModal} /> : null}
     </div>
@@ -133,3 +134,64 @@ const BuilderPage = ( { userData, accessToken } ) => {
 };
 
 export default BuilderPage;
+
+const Form = styled.form`
+  padding: 0.25em 8em;
+  height: 100px;
+  display: block;
+  align-content: center;
+`;
+
+const Label = styled.label`
+  display: block;
+  height: 4rem;
+  position: relative;
+`;
+
+const NameInput = styled.input`
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 100%;
+  line-height: 4rem;
+  outline: none;
+  padding: 0 1rem;
+  text-align: center;
+  &:focus {
+    & + .input-after {
+      animation: type 1.25s ease 0.5s infinite;
+      box-shadow: none;
+      height: calc(100% - 1rem);
+      margin-left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+    }
+
+    &::placeholder {
+      opacity: 0;
+      transition: 0.15s ease;
+    }
+  }
+`;
+
+const SubmitButtonWrapper = styled.div`
+  height: 50px;
+`;
+
+const SubmitButton = styled.input`
+  padding: .5em 1em;
+  margin: 1.5em;
+  background-color: rgb(0,136,122);
+  color: white;
+  border-radius: 50px;
+  height: 100%;
+  cursor: pointer;
+  border-color: transparent;
+  font-weight: bolder;
+  font-size: large;
+`;

@@ -75,7 +75,7 @@ const ButtonsWrapper = styled.div`
   height: 50px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   border-radius: 50px;
   height: 100%;
   cursor: pointer;

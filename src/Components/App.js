@@ -33,10 +33,10 @@ const App = () => {
   }, [accessToken]);
 
   return (
-    <div>
+    <Wrapper>
       {signedIn
       ? <BuilderPage userData={userData} accessToken={accessToken}/>
-      : <Wrapper>
+      : <div>
         <div>
           <span>PlayTime</span>
           <p>PlayTime lets you quickly build Spotify playlists based on your desired play length. Sign in to get building!</p>
@@ -44,8 +44,8 @@ const App = () => {
         <button onClick={handleSignIn}>
           Sign into Spotify
         </button>
-      </Wrapper>}
-    </div>
+      </div>}
+    </Wrapper>
   );
 }
 
@@ -53,4 +53,8 @@ export default App;
 
 const Wrapper = styled.div`
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: -webkit-fill-available;
 `;
