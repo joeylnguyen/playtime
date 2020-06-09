@@ -186,7 +186,7 @@ const SubmitButtonWrapper = styled.div`
 const SubmitButton = styled.input`
   padding: .5em 1em;
   margin: 1.5em;
-  background-color: rgb(0,136,122);
+  background-color: rgb(30,215,96);
   color: white;
   border-radius: 50px;
   height: 100%;

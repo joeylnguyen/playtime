@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import querystring from 'querystring';
 import BuilderPage from './BuilderPage';
+import { Button } from './Confirmation';
 import '../App.css';
 
 const App = () => {
@@ -37,13 +38,13 @@ const App = () => {
       {signedIn
       ? <BuilderPage userData={userData} accessToken={accessToken}/>
       : <div>
-        <div>
-          <span>PlayTime</span>
-          <p>PlayTime lets you quickly build Spotify playlists based on your desired play length. Sign in to get building!</p>
-        </div>
-        <button onClick={handleSignIn}>
+        <Title>PlayTime</Title>
+          <Paragraph>
+            PlayTime lets you quickly build Spotify playlists based on your desired play length. <br/>Sign in to get building!
+          </Paragraph>
+        <LoginButton onClick={handleSignIn}>
           Sign into Spotify
-        </button>
+        </LoginButton>
       </div>}
     </Wrapper>
   );
@@ -57,4 +58,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   height: -webkit-fill-available;
+`;
+
+const Title = styled.span`
+  font-size: xxx-large;
+  font-weight: 200;
+`;
+
+const Paragraph = styled.p`
+  padding: 1em;
+  font-size: larger;
+  font-weight: 100;
+`;
+
+const LoginButton = styled(Button)`
+  padding: .5em 1em;
 `;

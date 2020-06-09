@@ -81,17 +81,18 @@ export const Button = styled.button`
   cursor: pointer;
   border-color: transparent;
   font-weight: bolder;
+  background-color: rgb(30,215,96);
+  color: white;
 `;
 
 const OpenButton = styled(Button)`
   width: 55%;
   margin: .5em;
-  background-color: rgb(0,136,122);
-  color: white;
 `;
 
 const CloseButton = styled(Button)`
   width: 35%;
   margin: .5em;
   background-color: rgb(237,234,229);
+  color: black;
 `;
