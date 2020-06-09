@@ -1,20 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Timer from './Timer';
+
 
 const BuilderPage = ( { userData, accessToken } ) => {
   const [tracks, setTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('');
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
 
   const handleChange = (event) => {
-    setPlaylistName(event.target.value);
+    switch(event.target.id) {
+      case 'playlistName':
+        setPlaylistName(event.target.value);
+        break;
+      case 'hours':
+        setHours(event.target.value);
+        break;
+      case 'minutes':
+        setMinutes(event.target.value);
+        break;
+      default:
+        break;
+    }
   };
 
-  const addTracksToPlaylist = (playlistId) => {
+  const buildTracklist = () => {
+    let tracklist = [];
+    const convertedHours = hours * 3600000;
+    const convertedMinutes = minutes * 60000;
+    let remainingDuration = convertedHours + convertedMinutes;
+
+    for (let i = 0; i < tracks.length; i += 1) {
+      if (remainingDuration > 0) {
+        remainingDuration -= tracks[i].trackDuration;
+        tracklist.push(tracks[i].uri);
+      } else {
+        break;
+      }
+    }
+    return tracklist;
+  };
+
+  const addTracksToPlaylist = (playlistId, tracklist) => {
     axios({
       method: 'post',
       url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       headers: {'Authorization': 'Bearer ' + accessToken},
-      data: {'uris': tracks}
+      data: {'uris': tracklist}
     })
       .then((result) => console.log(result))
       .catch((error) => console.log(error));
@@ -33,7 +66,8 @@ const BuilderPage = ( { userData, accessToken } ) => {
       }
     })
       .then((result) => {
-        addTracksToPlaylist(result.data.id);
+        const tracklist = buildTracklist();
+        addTracksToPlaylist(result.data.id, tracklist);
         setPlaylistName('');
       })
       .catch((error) => console.log(error));
@@ -47,8 +81,9 @@ const BuilderPage = ( { userData, accessToken } ) => {
         headers: {'Authorization': 'Bearer ' + accessToken},
       })
       .then((result) => {
-        console.log(result);
-        const tracksArray = result.data.tracks.map((track) => track.uri);
+        const tracksArray = result.data.tracks.map((track) => {
+          return { uri: track.uri, trackDuration: track.duration_ms };
+        });
         setTracks(tracksArray);
       })
       .catch((error) => console.log(error));
@@ -73,10 +108,11 @@ const BuilderPage = ( { userData, accessToken } ) => {
   return (
     <div>
       <div>Hi {userData.display_name}</div>
+      <Timer hours={hours} minutes={minutes} handleChange={handleChange} />
       <form onSubmit={handleCreatePlaylist}>
         <label>
           Playlist Name:
-          <input type="text" name="playlistName" value={playlistName} onChange={handleChange}/>
+          <input type="text" id="playlistName" value={playlistName} onChange={handleChange} />
         </label>
         <input type ="submit" value="Create Playlist!" />
       </form>

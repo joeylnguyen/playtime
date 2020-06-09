@@ -25,7 +25,6 @@ const App = () => {
         headers: {'Authorization': 'Bearer ' + accessToken},
       })
         .then((result) => {
-          console.log(result)
           setUserData(result.data);
           setSignedIn(true);
         })
