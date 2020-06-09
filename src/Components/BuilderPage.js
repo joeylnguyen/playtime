@@ -127,7 +127,7 @@ const BuilderPage = ( { userData, accessToken } ) => {
         </label>
         <input type ="submit" value="Create Playlist!" />
       </form>
-      {showModal ? <Confirmation playlistData={playlistData} accessToken={accessToken} /> : null}
+      {showModal ? <Confirmation playlistData={playlistData} accessToken={accessToken} setShowModal={setShowModal} /> : null}
     </div>
   )
 };
