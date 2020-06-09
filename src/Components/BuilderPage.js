@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Timer from './Timer';
+import Confirmation from './Confirmation';
 
 
 const BuilderPage = ( { userData, accessToken } ) => {
   const [tracks, setTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('');
+  const [playlistData, setPlaylistData] = useState({});
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
 
   const handleChange = (event) => {
     switch(event.target.id) {
@@ -49,7 +53,10 @@ const BuilderPage = ( { userData, accessToken } ) => {
       headers: {'Authorization': 'Bearer ' + accessToken},
       data: {'uris': tracklist}
     })
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        setShowModal(true);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -66,8 +73,12 @@ const BuilderPage = ( { userData, accessToken } ) => {
       }
     })
       .then((result) => {
+        console.log(result.data);
+        setPlaylistData(result.data);
         const tracklist = buildTracklist();
         addTracksToPlaylist(result.data.id, tracklist);
+        setHours(0);
+        setMinutes(0);
         setPlaylistName('');
       })
       .catch((error) => console.log(error));
@@ -116,8 +127,8 @@ const BuilderPage = ( { userData, accessToken } ) => {
         </label>
         <input type ="submit" value="Create Playlist!" />
       </form>
+      {showModal ? <Confirmation playlistData={playlistData} accessToken={accessToken} /> : null}
     </div>
-
   )
 };
 
