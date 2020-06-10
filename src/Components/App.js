@@ -40,10 +40,10 @@ const App = () => {
       : <div>
         <Title>PlayTime</Title>
           <Paragraph>
-            PlayTime lets you quickly build Spotify playlists based on your desired play length. <br/>Sign in to get building!
+            PlayTime lets you quickly build Spotify playlists based on your desired playlist duration. <br/>Sign in to get started!
           </Paragraph>
         <LoginButton onClick={handleSignIn}>
-          Sign into Spotify
+          Sign in with Spotify
         </LoginButton>
       </div>}
     </Wrapper>

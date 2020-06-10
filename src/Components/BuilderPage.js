@@ -118,12 +118,9 @@ const BuilderPage = ( { userData, accessToken } ) => {
 
   return (
     <div>
-      <div>Hi {userData.display_name}</div>
       <Timer hours={hours} minutes={minutes} handleChange={handleChange} />
       <form onSubmit={handleCreatePlaylist}>
-        <Label>
-          <NameInput type="text" id="playlistName" placeholder="Name your playlist" value={playlistName} onChange={handleChange} />
-        </Label>
+        <NameInput type="text" id="playlistName" placeholder="Name your playlist" value={playlistName} onChange={handleChange} />
         <SubmitButtonWrapper>
           <SubmitButton type ="submit" value="Create Playlist" />
         </SubmitButtonWrapper>
@@ -135,20 +132,8 @@ const BuilderPage = ( { userData, accessToken } ) => {
 
 export default BuilderPage;
 
-const Form = styled.form`
-  padding: 0.25em 8em;
-  height: 100px;
-  display: block;
-  align-content: center;
-`;
-
-const Label = styled.label`
-  display: block;
-  height: 4rem;
-  position: relative;
-`;
-
 const NameInput = styled.input`
+
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -159,7 +144,7 @@ const NameInput = styled.input`
   height: 100%;
   line-height: 4rem;
   outline: none;
-  padding: 0 1rem;
+  padding: .75rem 1rem;
   text-align: center;
   &:focus {
     & + .input-after {

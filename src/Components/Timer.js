@@ -19,7 +19,7 @@ const Timer = ( { hours, minutes, handleChange } ) => {
 export default Timer;
 
 const TimerWrapper = styled.div`
-  padding: 1.5em 13em .5em;
+  padding: 1.5em 13em 0em;
   justify-content: center;
   height: 100px;
   align-items: center;
