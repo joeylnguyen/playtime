@@ -19,14 +19,13 @@ const Timer = ( { hours, minutes, handleChange } ) => {
 export default Timer;
 
 const TimerWrapper = styled.div`
-  padding: 1.5em 13em 0em;
   justify-content: center;
   height: 100px;
-  align-items: center;
 `;
 
 const TimeInputWrapper = styled.span`
   font-size: larger;
+  color: white;
 `;
 
 const HourInput = styled.input`
@@ -35,6 +34,8 @@ const HourInput = styled.input`
   text-align: right;
   font-size: 40px;
   font-weight: bolder;
+  background-color: transparent;
+  color: white;
 `;
 
 const MinuteInput = styled.input`
@@ -43,4 +44,6 @@ const MinuteInput = styled.input`
   text-align: right;
   font-size: 40px;
   font-weight: bolder;
+  background-color: transparent;
+  color: white;
 `;

@@ -34,9 +34,9 @@ const Confirmation = ({ playlistData, accessToken, setShowModal }) => {
           </div>
           <ButtonsWrapper>
             <a href={uri}>
-              <OpenButton>Open Playlist</OpenButton>
+              <OpenButton>OPEN PLAYLIST</OpenButton>
             </a>
-            <CloseButton onClick={() => setShowModal(false)}>Close</CloseButton>
+            <CloseButton onClick={() => setShowModal(false)}>CLOSE</CloseButton>
           </ButtonsWrapper>
         </div>)}
       </ModalContent>
@@ -57,13 +57,14 @@ const Modal = styled.div`
 
 const ModalContent = styled.div`
   position: fixed;
-  background: white;
+  background: rgb(33,33,33);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 1.5em 3.5em 2em;
   border-radius: .5em;
   text-align: center;
+  color: white;
 `;
 
 const PlaylistImage = styled.img`
@@ -93,6 +94,6 @@ const OpenButton = styled(Button)`
 const CloseButton = styled(Button)`
   width: 35%;
   margin: .5em;
-  background-color: rgb(237,234,229);
-  color: black;
+  background-color: rgb(83,83,83);
+  color: white;
 `;

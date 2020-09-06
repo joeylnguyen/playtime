@@ -12,7 +12,7 @@ const App = () => {
   const [accessToken, setAccessToken] = useState('');
 
   const handleSignIn = () => {
-    window.location = 'http://localhost:8888/login';
+    window.location = 'http://13.57.127.139:8888/login';
   }
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const App = () => {
       : <div>
         <Title>PlayTime</Title>
           <Paragraph>
-            PlayTime lets you quickly build Spotify playlists based on your desired playlist duration. <br/>Sign in to get started!
+            PlayTime lets you quickly build Spotify playlists based on your desired playlist duration. <br/>Log in to get started!
           </Paragraph>
         <LoginButton onClick={handleSignIn}>
-          Sign in with Spotify
+          LOG IN WITH SPOTIFY
         </LoginButton>
       </div>}
     </Wrapper>
@@ -57,18 +57,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: -webkit-fill-available;
+  min-height: 100vh;
+  background-color: black;
 `;
 
 const Title = styled.span`
   font-size: xxx-large;
   font-weight: 200;
+  color: white;
 `;
 
 const Paragraph = styled.p`
   padding: 1em;
   font-size: larger;
   font-weight: 100;
+  color: white;
 `;
 
 const LoginButton = styled(Button)`

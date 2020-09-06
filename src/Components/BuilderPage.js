@@ -28,7 +28,7 @@ const BuilderPage = ( { userData, accessToken } ) => {
         break;
     }
   };
-
+ // TODO: Can export this into own modular function
   const buildTracklist = () => {
     let tracklist = [];
     const convertedHours = hours * 3600000;
@@ -122,7 +122,7 @@ const BuilderPage = ( { userData, accessToken } ) => {
       <form onSubmit={handleCreatePlaylist}>
         <NameInput type="text" id="playlistName" placeholder="Name your playlist" value={playlistName} onChange={handleChange} />
         <SubmitButtonWrapper>
-          <SubmitButton type ="submit" value="Create Playlist" />
+          <SubmitButton type ="submit" value="CREATE PLAYLIST" />
         </SubmitButtonWrapper>
       </form>
       {showModal ? <Confirmation playlistData={playlistData} accessToken={accessToken} setShowModal={setShowModal} /> : null}
@@ -137,7 +137,7 @@ const NameInput = styled.input`
   background-color: transparent;
   border: none;
   border-radius: 5px;
-  color: black;
+  color: white;
   font-family: "Work Sans", sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
