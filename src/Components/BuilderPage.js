@@ -47,6 +47,8 @@ const BuilderPage = ( { userData, accessToken } ) => {
   };
 
   const addTracksToPlaylist = (playlistId, tracklist) => {
+    console.log(`tracklist: `, tracklist)
+
     axios({
       method: 'post',
       url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -56,6 +58,9 @@ const BuilderPage = ( { userData, accessToken } ) => {
       .then((result) => {
         console.log(result);
         setShowModal(true);
+        setHours(0);
+        setMinutes(0);
+        setPlaylistName('');
       })
       .catch((error) => console.log(error));
   };
@@ -73,13 +78,9 @@ const BuilderPage = ( { userData, accessToken } ) => {
       }
     })
       .then((result) => {
-        console.log(result.data);
         setPlaylistData(result.data);
         const tracklist = buildTracklist();
         addTracksToPlaylist(result.data.id, tracklist);
-        setHours(0);
-        setMinutes(0);
-        setPlaylistName('');
       })
       .catch((error) => console.log(error));
   }

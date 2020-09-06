@@ -12,7 +12,7 @@ const App = () => {
   const [accessToken, setAccessToken] = useState('');
 
   const handleSignIn = () => {
-    window.location = 'https://spotify-playtime-backend.herokuapp.com/login';
+    window.location = 'http://spotify-playtime-backend.herokuapp.com/login';
   }
 
   useEffect(() => {

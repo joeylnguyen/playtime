@@ -14,7 +14,8 @@ const Confirmation = ({ playlistData, accessToken, setShowModal }) => {
       headers: {'Authorization': 'Bearer ' + accessToken},
     })
       .then((result) => {
-        setplayListImage(result.data[1].url)
+        console.log(result.data);
+        setplayListImage(result.data.length > 1 ? result.data[1].url : result.data[0].url)
         setLoading(false);
       })
       .catch((error) => console.log(error));
@@ -29,7 +30,7 @@ const Confirmation = ({ playlistData, accessToken, setShowModal }) => {
           <p>Your playlist is ready for groovin'!</p>
           <div>
             <a href={uri}>
-              <PlaylistImage src={playlistImage} alt='Playlist cover' />
+              <PlaylistImage src={playlistImage} alt='Playlist cover' height='300' width='300' />
             </a>
           </div>
           <ButtonsWrapper>
