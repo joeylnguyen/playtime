@@ -180,4 +180,7 @@ const SubmitButton = styled.input`
   border-color: transparent;
   font-weight: bolder;
   font-size: large;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
