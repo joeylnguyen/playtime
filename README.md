@@ -2,7 +2,7 @@
 
 > A web application that allows users to quickly build Spotify playlists based on play duration. This was built using React, Node/Express, and Spotify Web API.
 
-> See it live [here](https://spotify-playtime.herokuapp.com)!
+See it live [here](https://spotify-playtime.herokuapp.com)!
 
 ## Table of Contents
 
